@@ -2201,3 +2201,13 @@
     transform: scale(2);
   }
 }
+
+/* 强制所有使用 IBM 字体、DM Sans 字体和 Pixelify 字体的元素取消斜体 */
+.mono, 
+[class*="IBM_Plex_Mono"], 
+.inter, 
+[class*="DM_Sans"],
+.pixelify,
+[class*="Pixelify"] {
+    font-style: normal !important;
+}
