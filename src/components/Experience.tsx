@@ -15,7 +15,7 @@ const experiences: ExperienceItem[] = [
     type: "Work",
     role: "Thesis Worker",
     organization: "Epiroc",
-    period: "2026 - Present",
+    period: "2026",
     description:
       "Explore how interaction design can soften the relationship between humans and automated mining systems; Design for human-in-the-loop situation;",
   },
@@ -145,13 +145,13 @@ export function Experience() {
       id="experience"
       className="py-20 sm:py-32 bg-[#f5f5f5] min-h-screen"
     >
-      <div className="w-full px-4 sm:px-10">
+      <div className="portfolio-container">
         <motion.h2
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-['Redaction_50'] italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none text-black mb-20 sm:mb-32"
+          className="site-section-title font-['Redaction_50'] italic leading-none text-black mb-20 sm:mb-32"
         >
           Experiences
         </motion.h2>
@@ -181,9 +181,9 @@ function ExperienceSection({
   items: ExperienceItem[];
 }) {
   return (
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 border-t border-black/30 pt-8 lg:pt-0 lg:border-t-0">
+    <div className="portfolio-grid border-t border-black/30 pt-8 lg:pt-0 lg:border-t-0">
       {/* Section Title - Sticky on Desktop */}
-      <div className="lg:w-1/4 shrink-0">
+      <div className="experience-section-title">
         <div className="lg:sticky lg:top-32 lg:border-t lg:border-black/30 lg:pt-4 inline-block">
           <h3 className="font-['IBM_Plex_Mono'] text-lg sm:text-xl font-light tracking-tight text-black/50">
             {title}
@@ -192,7 +192,7 @@ function ExperienceSection({
       </div>
 
       {/* Items List */}
-      <div className="lg:w-3/4 flex flex-col lg:border-t-0">
+      <div className="experience-section-list flex flex-col lg:border-t-0">
         {items.map((item, index) => (
           <ExperienceRow
             key={index}

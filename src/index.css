@@ -903,11 +903,11 @@
   }
 
   .bg-\[\#f2f2f2\] {
-    background-color: #f2f2f2;
+    background-color: #fff;
   }
 
   .bg-\[\#f5f5f5\] {
-    background-color: #f5f5f5;
+    background-color: #fff;
   }
 
   .bg-accent-blue {
@@ -1932,12 +1932,16 @@
 
 
 :root {
-  --background: #f5f5f5;
+  --background: #fff;
   --foreground: #000;
   --accent-blue: #03f;
   --accent-blue-glow: #1a00ff;
   --card-bg: #d9d9d9;
   --radius: 15px;
+  --portfolio-max-width: 1120px;
+  --portfolio-gutter: clamp(28px, 6vw, 96px);
+  --portfolio-mobile-gutter: 24px;
+  --portfolio-column-gap: clamp(20px, 3vw, 48px);
 }
 
 @keyframes fadeIn {
@@ -2210,4 +2214,159 @@
 .pixelify,
 [class*="Pixelify"] {
     font-style: normal !important;
+}
+
+/* Shared portfolio layout system */
+.portfolio-container {
+  width: min(
+    calc(100% - (var(--portfolio-gutter, clamp(24px, 4vw, 64px)) * 2)),
+    var(--portfolio-max-width, 1120px)
+  );
+  margin-inline: auto;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--portfolio-column-gap, clamp(24px, 3.5vw, 64px));
+}
+
+.site-section-title {
+  font-size: clamp(3rem, 5vw, 4.125rem);
+}
+
+.hero-layout {
+  align-items: end;
+  row-gap: clamp(24px, 4vw, 48px);
+  padding-top: 8vh;
+}
+
+.hero-title-block {
+  grid-column: 1 / span 7;
+  font-size: clamp(6rem, 11vw, 9.75rem);
+}
+
+.hero-copy {
+  grid-column: 9 / span 4;
+  justify-self: end;
+  align-self: end;
+  width: min(100%, 420px);
+}
+
+.hero-footer-layout {
+  align-items: center;
+  row-gap: 32px;
+}
+
+.hero-footer-left {
+  grid-column: 1 / span 6;
+}
+
+.hero-footer-right {
+  grid-column: 9 / span 4;
+  justify-self: end;
+}
+
+.experience-section-title {
+  grid-column: 1 / span 3;
+}
+
+.experience-section-list {
+  grid-column: 4 / span 9;
+}
+
+.project-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.project-detail-shell {
+  background: #fff;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+
+.project-detail-header {
+  padding-block: clamp(24px, 3vw, 28px);
+}
+
+.project-info-grid {
+  row-gap: 32px;
+}
+
+.project-info-grid-two > * {
+  grid-column: span 6;
+}
+
+.project-info-grid-three > * {
+  grid-column: span 4;
+}
+
+.case-study-section {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--portfolio-column-gap, clamp(24px, 3.5vw, 64px));
+  row-gap: 32px;
+}
+
+.case-study-section > :first-child {
+  grid-column: 1 / span 3;
+}
+
+.case-study-section > :last-child {
+  grid-column: 4 / span 9;
+  min-width: 0;
+}
+
+.contact-email {
+  font-size: clamp(2.5rem, 4.4vw, 4rem);
+}
+
+@media (max-width: 1023px) {
+  .hero-title-block,
+  .hero-copy {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .hero-copy {
+    width: min(100%, 560px);
+  }
+}
+
+@media (max-width: 767px) {
+  .portfolio-container {
+    width: min(
+      calc(100% - (var(--portfolio-mobile-gutter, 24px) * 2)),
+      var(--portfolio-max-width, 1120px)
+    );
+  }
+
+  .portfolio-grid,
+  .case-study-section {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 20px;
+  }
+
+  .hero-title-block {
+    font-size: clamp(4.75rem, 22vw, 7rem);
+  }
+
+  .hero-footer-left,
+  .hero-footer-right,
+  .experience-section-title,
+  .experience-section-list,
+  .project-info-grid-two > *,
+  .project-info-grid-three > *,
+  .case-study-section > :first-child,
+  .case-study-section > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .hero-footer-right {
+    justify-self: start;
+  }
+
+  .contact-email {
+    font-size: clamp(2.25rem, 11vw, 3.5rem);
+  }
 }

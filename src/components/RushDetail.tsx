@@ -26,13 +26,13 @@ export function RushDetail() {
     <div className="flex flex-col gap-16">
 
       {/* ── 01 // CONTEXT ── */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-        <div className="md:w-1/4">
+      <div className="case-study-section">
+        <div>
           <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
             01 // Context
           </h3>
         </div>
-        <div className="md:w-3/4 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           {/* Starting point */}
           <motion.h4 {...fadeUp} className="font-['DM_Sans'] text-2xl font-medium">
             Starting point
@@ -60,13 +60,13 @@ export function RushDetail() {
       </div>
 
       {/* ── 02 // IDEATION ── */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-        <div className="md:w-1/4">
+      <div className="case-study-section">
+        <div>
           <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
             02 // Ideation
           </h3>
         </div>
-        <div className="md:w-3/4 flex flex-col gap-10">
+        <div className="flex flex-col gap-10">
           {/* Definition */}
           <motion.h4 {...fadeUp} className="font-['DM_Sans'] text-2xl font-medium">
             Definition
@@ -129,13 +129,13 @@ export function RushDetail() {
       </div>
 
       {/* ── 03 // DESIGN ── */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-        <div className="md:w-1/4">
+      <div className="case-study-section">
+        <div>
           <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
             03 // Design
           </h3>
         </div>
-        <div className="md:w-3/4 flex flex-col gap-10">
+        <div className="flex flex-col gap-10">
           {/* Rush naming & logo */}
           <motion.h4 {...fadeUp} className="font-['DM_Sans'] text-2xl font-medium">
             Rush

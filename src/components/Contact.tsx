@@ -47,12 +47,12 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-[90vh] flex flex-col justify-between py-10 px-6 sm:px-10 bg-[#f5f5f5] overflow-hidden"
+      className="relative min-h-[90vh] flex flex-col justify-between py-10 bg-[#f5f5f5] overflow-hidden"
     >
       <PixelMatrix withMask />
 
       {/* Top Status Bar */}
-      <div className="w-full flex justify-between items-center border-b border-black/10 pb-4 z-10">
+      <div className="portfolio-container flex justify-between items-center border-b border-black/10 pb-4 z-10">
         <span className="font-['IBM_Plex_Mono'] text-xs uppercase tracking-widest text-black/60">
           [ STATUS: OPEN ]
         </span>
@@ -62,14 +62,14 @@ export function Contact() {
       </div>
 
       {/* Main Interactive Center */}
-      <div className="flex-grow flex flex-col justify-center items-center z-10 relative gap-8">
+      <div className="portfolio-container flex-grow flex flex-col justify-center items-center z-10 relative gap-8">
         <p className="font-['IBM_Plex_Mono'] text-sm sm:text-base text-black/40 uppercase tracking-widest">
           Have an idea?
         </p>
 
         {/* Giant Magnetic Ascii Button */}
         <a
-          href="mailto:bearring19@gmail.com"
+          href="mailto:tianqixiong01@gmail.com"
           className="group relative inline-flex items-center justify-center cursor-pointer"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
@@ -78,10 +78,10 @@ export function Contact() {
             ref={magnetRef}
             animate={magnetPos}
             transition={SPRING_CONFIG}
-            className="font-['IBM_Plex_Mono'] text-[8vw] sm:text-[6vw] lg:text-[5vw] leading-none text-black transition-colors duration-300 group-hover:text-accent-blue text-center"
+            className="contact-email font-['IBM_Plex_Mono'] leading-none text-black transition-colors duration-300 group-hover:text-accent-blue text-center"
           >
             <AsciiText
-              text="BEARRING19@GMAIL.COM"
+              text="TIANQIXIONG01@GMAIL.COM"
               mobileBreakBefore="@"
             />
           </motion.div>
@@ -94,7 +94,7 @@ export function Contact() {
       </div>
 
       {/* Footer Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-t border-black/10 pt-10 z-10">
+      <div className="portfolio-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-t border-black/10 pt-10 z-10">
         {/* Copyright */}
         <div className="flex flex-col gap-2 justify-between">
           <span className="font-['IBM_Plex_Mono'] text-[10px] text-black/40 uppercase tracking-widest">

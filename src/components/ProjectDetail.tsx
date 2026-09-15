@@ -9,6 +9,7 @@ const Maxi3DDetail = lazy(() => import('./Maxi3DDetail').then(m => ({ default: m
 const ElfDetail = lazy(() => import('./ElfDetail').then(m => ({ default: m.ElfDetail })));
 const RushDetail = lazy(() => import('./RushDetail').then(m => ({ default: m.RushDetail })));
 const OldieDetail = lazy(() => import('./OldieDetail').then(m => ({ default: m.OldieDetail })));
+const WhereControlSoftensDetail = lazy(() => import('./WhereControlSoftensDetail').then(m => ({ default: m.WhereControlSoftensDetail })));
 
 const ARROW_LEFT_PATH = "M19 11H11V7H9V9H7V11H5V13H7V15H9V17H11V13H19V11Z";
 const ARROW_RIGHT_PATH = "M5 11H13V7H15V9H17V11H19V13H17V15H15V17H13V13H5V11Z";
@@ -30,10 +31,77 @@ interface ProjectDetailProps {
 
 export function ProjectDetail({ project, onClose, onNextProject }: ProjectDetailProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const lastScrollTopRef = useRef(0);
+  const touchStartYRef = useRef(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   useEffect(() => {
     containerRef.current?.scrollTo(0, 0);
+    lastScrollTopRef.current = 0;
+    setIsHeaderVisible(true);
   }, [project]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const currentScrollTop = container.scrollTop;
+      const scrollDelta = currentScrollTop - lastScrollTopRef.current;
+
+      if (currentScrollTop < 24) {
+        setIsHeaderVisible(true);
+      } else if (scrollDelta > 8) {
+        setIsHeaderVisible(false);
+      } else if (scrollDelta < -8) {
+        setIsHeaderVisible(true);
+      }
+
+      lastScrollTopRef.current = currentScrollTop;
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const shouldBlockOverscroll = (deltaY: number) => {
+      const atTop = container.scrollTop <= 0;
+      const atBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
+      return (atTop && deltaY < 0) || (atBottom && deltaY > 0);
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (shouldBlockOverscroll(event.deltaY)) {
+        event.preventDefault();
+      }
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      touchStartYRef.current = event.touches[0]?.clientY ?? 0;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const currentY = event.touches[0]?.clientY ?? 0;
+      const deltaY = touchStartYRef.current - currentY;
+      if (shouldBlockOverscroll(deltaY)) {
+        event.preventDefault();
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
 
   const { prevProject, nextProject } = useMemo(() => {
     const idx = projects.findIndex(p => p.id === project.id);
@@ -54,15 +122,24 @@ export function ProjectDetail({ project, onClose, onNextProject }: ProjectDetail
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-[#f5f5f5] overflow-y-auto"
+      className="project-detail-shell fixed inset-0 z-[100] bg-[#f5f5f5] overflow-y-auto"
       ref={containerRef}
     >
       {/* Sticky Header */}
-      <div className="sticky top-0 z-50 bg-[#f5f5f5] border-b border-black/10 flex justify-between items-center px-4 py-4 sm:px-10">
-        <BackButton onClick={onClose} />
-      </div>
+      <motion.div
+        animate={{
+          y: isHeaderVisible ? 0 : '-100%',
+          opacity: isHeaderVisible ? 1 : 0,
+        }}
+        transition={{ duration: 0.22, ease: 'easeOut' }}
+        className="project-detail-header sticky top-0 z-50 bg-[#f5f5f5]"
+      >
+        <div className="portfolio-container flex justify-between items-center">
+          <BackButton onClick={onClose} />
+        </div>
+      </motion.div>
 
-      <div className="w-full px-4 sm:px-10 py-12 sm:py-20">
+      <div className="portfolio-container pb-12 sm:pb-20">
         {/* Project Header */}
         <div className="mb-12 sm:mb-16">
           <motion.div 
@@ -79,7 +156,7 @@ export function ProjectDetail({ project, onClose, onNextProject }: ProjectDetail
               <span>{project.category}</span>
             </div>
             
-            <h1 className="font-['IBM_Plex_Mono',monospace] text-4xl sm:text-6xl md:text-7xl leading-none tracking-tighter text-black uppercase break-words">
+            <h1 className="project-title font-['IBM_Plex_Mono',monospace] leading-none tracking-tighter text-black uppercase break-words">
               {project.title}
             </h1>
           </motion.div>
@@ -110,7 +187,7 @@ export function ProjectDetail({ project, onClose, onNextProject }: ProjectDetail
            </div>
 
            {/* Info Grid: Role & Timeline */}
-           <div className={`grid grid-cols-1 ${hasThreeColGrid ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-8 sm:gap-16 border-t border-black pt-8`}>
+           <div className={`portfolio-grid project-info-grid ${hasThreeColGrid ? 'project-info-grid-three' : 'project-info-grid-two'} border-t border-black pt-8`}>
               <div className="flex flex-col gap-4">
                  <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest opacity-50">ROLE</h3>
                  <p className="font-['IBM_Plex_Mono',monospace] text-lg">
@@ -143,11 +220,7 @@ export function ProjectDetail({ project, onClose, onNextProject }: ProjectDetail
                 ) : project.id === 2 ? (
                   <RushDetail />
                 ) : project.id === 1 ? (
-                  <div className="flex items-center justify-center py-32">
-                    <p className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest text-black/40">
-                      Coming Soon
-                    </p>
-                  </div>
+                  <WhereControlSoftensDetail />
                 ) : project.id === 5 ? (
                   <OldieDetail />
                 ) : (
@@ -174,11 +247,11 @@ function DefaultDetail({ project }: { project: Project }) {
   return (
     <>
       {/* 1. Background / Context */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-         <div className="md:w-1/4">
+      <div className="case-study-section">
+         <div>
             <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">01 // CONTEXT</h3>
          </div>
-         <div className="md:w-3/4 flex flex-col gap-6">
+         <div className="flex flex-col gap-6">
             <h4 className="font-['DM_Sans'] text-2xl font-medium">The Challenge</h4>
             <p className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl">
                {project.challenge || "Project challenge description not available."}
@@ -187,11 +260,11 @@ function DefaultDetail({ project }: { project: Project }) {
       </div>
 
       {/* 2. Research & Insights */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-         <div className="md:w-1/4">
+      <div className="case-study-section">
+         <div>
             <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">02 // RESEARCH</h3>
          </div>
-         <div className="md:w-3/4 flex flex-col gap-6">
+         <div className="flex flex-col gap-6">
             <h4 className="font-['DM_Sans'] text-2xl font-medium">User Insights</h4>
             <p className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl">
                {project.insights || "Research insights not available."}
@@ -212,11 +285,11 @@ function DefaultDetail({ project }: { project: Project }) {
       </div>
 
       {/* 3. Ideation & Wireframing */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-         <div className="md:w-1/4">
+      <div className="case-study-section">
+         <div>
             <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">03 // IDEATION</h3>
          </div>
-         <div className="md:w-3/4 flex flex-col gap-6">
+         <div className="flex flex-col gap-6">
             <h4 className="font-['DM_Sans'] text-2xl font-medium">Exploration</h4>
             <p className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl">
                {project.exploration || "Exploration details not available."}
@@ -233,11 +306,11 @@ function DefaultDetail({ project }: { project: Project }) {
       </div>
 
       {/* 4. Prototype & Final Design */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-         <div className="md:w-1/4">
+      <div className="case-study-section">
+         <div>
             <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">04 // SOLUTION</h3>
          </div>
-         <div className="md:w-3/4 flex flex-col gap-6">
+         <div className="flex flex-col gap-6">
             <h4 className="font-['DM_Sans'] text-2xl font-medium">High Fidelity</h4>
             <p className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl">
                {project.solution || "Solution details not available."}

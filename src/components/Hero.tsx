@@ -6,7 +6,7 @@ import { PixelTrail } from './PixelTrail';
 import { PixelMatrix } from './PixelMatrix';
 import svgPaths from '../imports/svg-q465zh1kbq';
 
-const COMPANIES = ['BMW Group', 'Volvo Cars', 'Cyclone', 'HOTO Tools', 'Fablab O'];
+const COMPANIES = ['Epiroc', 'BMW Group', 'Volvo Cars', 'Cyclone', 'HOTO Tools', 'Fablab O'];
 const NAV_ITEMS = ['WORK', 'EXPERIENCE', 'CONTACT'] as const;
 const PIXEL_COUNT = 48;
 
@@ -46,38 +46,40 @@ export function Hero() {
       <PixelTrail />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-6 sm:px-10 sm:py-8 mix-blend-difference text-white pointer-events-none">
-        {/* Magnetic Monster Icon */}
-        <div className="pointer-events-auto">
-          <MagneticButton onClick={scrollToTop} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center cursor-pointer">
-             <svg className="w-full h-full" viewBox="0 0 30.8 22" fill="none">
-               <path d={svgPaths.p269fae00} fill="currentColor" className="transition-colors duration-300"/>
-             </svg>
-          </MagneticButton>
-        </div>
+      <header className="fixed top-0 left-0 right-0 z-50 py-6 sm:py-8 mix-blend-difference text-white pointer-events-none">
+        <div className="portfolio-container flex justify-between items-center">
+          {/* Magnetic Monster Icon */}
+          <div className="pointer-events-auto">
+            <MagneticButton onClick={scrollToTop} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center cursor-pointer">
+               <svg className="w-full h-full" viewBox="0 0 30.8 22" fill="none">
+                 <path d={svgPaths.p269fae00} fill="currentColor" className="transition-colors duration-300"/>
+               </svg>
+            </MagneticButton>
+          </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden sm:flex gap-10 font-['IBM_Plex_Mono',monospace] text-lg pointer-events-auto">
-          <button onClick={() => scrollToSection('work')} className="hover:opacity-70 transition-opacity">
-            <AsciiText text="WORK" />
+          {/* Desktop nav */}
+          <nav className="hidden sm:flex gap-10 font-['IBM_Plex_Mono',monospace] text-lg pointer-events-auto">
+            <button onClick={() => scrollToSection('work')} className="hover:opacity-70 transition-opacity">
+              <AsciiText text="WORK" />
+            </button>
+            <button onClick={() => scrollToSection('experience')} className="hover:opacity-70 transition-opacity">
+              <AsciiText text="EXPERIENCE" />
+            </button>
+            <button onClick={() => scrollToSection('contact')} className="hover:opacity-70 transition-opacity">
+              <AsciiText text="CONTACT" />
+            </button>
+          </nav>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="sm:hidden pointer-events-auto w-8 h-8 flex flex-col items-center justify-center gap-[5px] cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} className="block w-6 h-[2px] bg-current origin-center" />
+            <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-6 h-[2px] bg-current origin-center" />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} className="block w-6 h-[2px] bg-current origin-center" />
           </button>
-          <button onClick={() => scrollToSection('experience')} className="hover:opacity-70 transition-opacity">
-            <AsciiText text="EXPERIENCE" />
-          </button>
-          <button onClick={() => scrollToSection('contact')} className="hover:opacity-70 transition-opacity">
-            <AsciiText text="CONTACT" />
-          </button>
-        </nav>
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="sm:hidden pointer-events-auto w-8 h-8 flex flex-col items-center justify-center gap-[5px] cursor-pointer"
-          aria-label="Toggle menu"
-        >
-          <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} className="block w-6 h-[2px] bg-current origin-center" />
-          <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-6 h-[2px] bg-current origin-center" />
-          <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} className="block w-6 h-[2px] bg-current origin-center" />
-        </button>
+        </div>
       </header>
 
       {/* Mobile Fullscreen Menu */}
@@ -108,14 +110,14 @@ export function Hero() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className="relative z-10 flex-grow flex flex-col justify-center px-6 sm:px-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-6 pt-[8vh]">
+      <div className="relative z-10 flex-grow flex flex-col justify-center">
+        <div className="portfolio-container portfolio-grid hero-layout">
           {/* Title */}
           <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="font-['Redaction_50'] italic text-[22vw] sm:text-[18vw] lg:text-[180px] leading-none text-black shrink-0"
+            className="hero-title-block font-['Redaction_50'] italic leading-none text-black"
           >
             Tianqi<br />Xiong
           </motion.h1>
@@ -125,7 +127,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="pb-1 lg:pb-3 w-full lg:w-[420px] shrink-0 text-left self-end lg:mr-0"
+            className="hero-copy pb-1 lg:pb-3 text-left"
           >
             <p className="font-['DM_Sans'] text-base sm:text-lg lg:text-xl leading-relaxed text-black text-pretty">
               Hej! I'm an interaction designer works at the intersection of technology and art, 
@@ -136,10 +138,11 @@ export function Hero() {
       </div>
 
       {/* Footer / Bottom Info */}
-      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center px-6 sm:px-10 pb-10 gap-8 md:gap-0">
+      <div className="relative z-10 pb-10">
+        <div className="portfolio-container portfolio-grid hero-footer-layout">
         
         {/* Previously work with */}
-        <div className="flex items-center gap-4">
+        <div className="hero-footer-left flex items-center gap-4 flex-wrap">
           <span className="font-['DM_Sans'] text-base sm:text-lg text-black">Previously work with:</span>
           <div className="h-[30px] sm:h-[36px] relative min-w-[140px] flex justify-center">
              <AnimatePresence mode='wait'>
@@ -168,14 +171,15 @@ export function Hero() {
         </div>
 
         {/* Current Status */}
-        <div className="flex items-center gap-3">
+        <div className="hero-footer-right flex items-center gap-3">
           <div className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full bg-accent-blue opacity-75"></span>
             <span className="relative inline-flex h-3 w-3 bg-accent-blue"></span>
           </div>
           <p className="font-['DM_Sans'] text-base sm:text-lg text-black">
-            Currently thesis worker at Epiroc
+            Available for work
           </p>
+        </div>
         </div>
       </div>
     </section>

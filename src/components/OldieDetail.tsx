@@ -23,13 +23,13 @@ export function OldieDetail() {
     <div className="flex flex-col gap-16">
 
       {/* ── 01 // PROTOTYPE ── */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-        <div className="md:w-1/4">
+      <div className="case-study-section">
+        <div>
           <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
             01 // Prototype
           </h3>
         </div>
-        <div className="md:w-3/4 flex flex-col gap-16">
+        <div className="flex flex-col gap-16">
 
           {/* Adaptable Chainsaw */}
           <div className="flex flex-col gap-6">
@@ -87,13 +87,13 @@ export function OldieDetail() {
       </div>
 
       {/* ── 02 // DESIGN ── */}
-      <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-        <div className="md:w-1/4">
+      <div className="case-study-section">
+        <div>
           <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
             02 // Design
           </h3>
         </div>
-        <div className="md:w-3/4 flex flex-col gap-16">
+        <div className="flex flex-col gap-16">
 
           {/* Mobility as Physarum */}
           <div className="flex flex-col gap-6">

@@ -10,7 +10,7 @@
 @custom-variant: dark (&:is(.dark *));
 
 :root {
-  --background: #f5f5f5;
+  --background: #fff;
   --foreground: #000000;
   --accent-blue: #0033FF;
   --accent-blue-glow: #1A00FF;

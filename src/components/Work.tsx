@@ -18,6 +18,7 @@ import oldieImg from "figma:asset/e382e5bc13f5f104003b87ebbb1bd06c8be66dc3.png";
 // Export the interface so App.tsx can use it
 export interface Project {
   id: number;
+  slug: string;
   title: string;
   category: string;
   year: string;
@@ -37,14 +38,15 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
+    slug: "where-control-softens",
     title: "WHERE CONTROL SOFTENS",
-    category: "Coming soon",
+    category: "Haptics & Prototyping",
     year: "2026",
     description:
-      "Redefining machine agency through 'weakness' to foster empathetic, non-dominant, and reflective human-machine interaction.",
+      "Three physical-digital interaction models exploring how automated mining machines can communicate their limits, uncertainty and physical state to remote operators.",
     image: controlSoftensImg,
     role: "Sole Creator",
-    timeline: "Jan 2026 - Present",
+    timeline: "Jan 2026 - Jun 2026",
     challenge:
       "In a rapidly evolving digital landscape, users are overwhelmed by complexity. The goal was to simplify the interaction model without sacrificing power, creating a system that feels almost invisible. We started by questioning the fundamental assumptions of the existing workflow.",
     insights:
@@ -60,6 +62,7 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    slug: "rush",
     title: "RUSH",
     category: "Product & AR",
     year: "2024",
@@ -84,6 +87,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
+    slug: "elf",
     title: "ELF",
     category: "UX/UI Design",
     year: "2024",
@@ -108,6 +112,7 @@ export const projects: Project[] = [
   },
   {
     id: 4,
+    slug: "maxi-3d",
     title: "MAXI 3D",
     category: "Product Integration",
     year: "2023",
@@ -132,6 +137,7 @@ export const projects: Project[] = [
   },
   {
     id: 5,
+    slug: "oldie-but-goodie",
     title: "OLDIE BUT GOODIE",
     category: "Archive",
     year: "2023",
@@ -327,13 +333,13 @@ export function Work({ onProjectSelect }: WorkProps) {
 
   return (
     <section id="work" className="py-20 sm:py-32 relative z-20 bg-[#f5f5f5]">
-      <div className="w-full px-4 sm:px-10">
+      <div className="portfolio-container">
         <motion.h2
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-['Redaction_50'] italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none text-black mb-12 sm:mb-16 md:mb-20"
+          className="site-section-title font-['Redaction_50'] italic leading-none text-black mb-12 sm:mb-16 md:mb-20"
         >
           Selected work*
         </motion.h2>
