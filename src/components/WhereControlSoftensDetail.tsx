@@ -28,6 +28,12 @@ export function WhereControlSoftensDetail() {
               Distance improves safety, but it also removes sound, vibration, resistance and other subtle cues that once helped operators understand what a machine was doing.
             </p>
           </motion.div>
+          <motion.p
+            {...fadeUp}
+            className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest text-black/40"
+          >
+            More content coming soon.
+          </motion.p>
         </div>
       </div>
     </div>
