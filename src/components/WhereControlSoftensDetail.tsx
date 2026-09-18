@@ -4,6 +4,7 @@ import weakMachineImage from '../assets/where-control-softens-weak-machine.png';
 import modelOneImage from '../assets/where-control-softens-model-1.png';
 import modelTwoImage from '../assets/where-control-softens-model-2.png';
 import modelThreeImage from '../assets/where-control-softens-model-3.png';
+import refusingButtonVideo from '../assets/where-control-softens-refusing-button.mp4';
 
 const fadeUp = {
   initial: { y: 20, opacity: 0 },
@@ -127,6 +128,16 @@ export function WhereControlSoftensDetail() {
             <p>
               Through OK, MAYBE and NO, the control becomes less willing to accept an action as confidence decreases.
             </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="w-full">
+            <video
+              src={refusingButtonVideo}
+              className="w-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
           </motion.div>
         </div>
       </div>
