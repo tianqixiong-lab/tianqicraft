@@ -5,6 +5,7 @@ import modelOneImage from '../assets/where-control-softens-model-1.png';
 import modelTwoImage from '../assets/where-control-softens-model-2.png';
 import modelThreeImage from '../assets/where-control-softens-model-3.png';
 import refusingButtonVideo from '../assets/where-control-softens-refusing-button.mp4';
+import machineMemoryVideo from '../assets/where-control-softens-machine-memory.mp4';
 
 const fadeUp = {
   initial: { y: 20, opacity: 0 },
@@ -132,6 +133,37 @@ export function WhereControlSoftensDetail() {
           <motion.div {...fadeUp} className="w-full">
             <video
               src={refusingButtonVideo}
+              className="w-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="case-study-section">
+        <div>
+          <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
+            05 // UNDERSTAND
+          </h3>
+        </div>
+        <div className="flex flex-col gap-6">
+          <motion.div
+            {...fadeUp}
+            className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl flex flex-col gap-4"
+          >
+            <p>
+              Machine Memory turns recent machine activity into something that can be physically revisited.
+            </p>
+            <p>
+              Sliding backwards through time lets operators retrace recent events, while haptic cues draw attention to significant moments.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="w-full">
+            <video
+              src={machineMemoryVideo}
               className="w-full object-cover"
               autoPlay
               loop
