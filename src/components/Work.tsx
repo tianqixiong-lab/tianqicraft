@@ -7,6 +7,7 @@ import {
 import { useState, useEffect, useCallback } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import controlSoftensImg from "figma:asset/7f90008e1199a8adbf5db61bdca4f4308d84b488.png";
+import controlSoftensDetailImg from "../assets/where-control-softens-detail.png";
 import maxi3dImg from "figma:asset/2979d391dbe261eaecf17c7ad86ce4ef2b6aa3f9.png";
 import maxi3dDetailImg from "figma:asset/c61ee5e9315c645f33e251b02efc31d3543ed999.png";
 import rushImg from "figma:asset/61595b63263adea1c8259a61291bc0863736f33b.png";
@@ -45,6 +46,7 @@ export const projects: Project[] = [
     description:
       "Three physical-digital interaction models exploring how automated mining machines can communicate their limits, uncertainty and physical state to remote operators.",
     image: controlSoftensImg,
+    detailImage: controlSoftensDetailImg,
     role: "Sole Creator",
     timeline: "Jan 2026 - Jun 2026",
     challenge:
