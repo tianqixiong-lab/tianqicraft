@@ -5,6 +5,7 @@ import modelOneImage from '../assets/where-control-softens-model-1.png';
 import modelTwoImage from '../assets/where-control-softens-model-2.png';
 import modelThreeImage from '../assets/where-control-softens-model-3.png';
 import hapticSurfaceImage from '../assets/where-control-softens-haptic-surface.png';
+import processImage from '../assets/where-control-softens-process.png';
 import refusingButtonVideo from '../assets/where-control-softens-refusing-button.mp4';
 import machineMemoryVideo from '../assets/where-control-softens-machine-memory.mp4';
 
@@ -197,6 +198,34 @@ export function WhereControlSoftensDetail() {
             <img
               src={hapticSurfaceImage}
               alt="Haptic surface system diagram with microphone, audio classification and haptics"
+              className="w-full object-cover"
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="case-study-section">
+        <div>
+          <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
+            07 // PROCESS
+          </h3>
+        </div>
+        <div className="flex flex-col gap-6">
+          <motion.div
+            {...fadeUp}
+            className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl flex flex-col gap-4"
+          >
+            <p>
+              All three interaction models were developed as fully functional physical–digital prototypes, combining software, electronics and custom physical components.
+            </p>
+            <p>
+              Building working systems allowed the interactions to be tested through real input, feedback and physical use rather than represented only as concepts.
+            </p>
+          </motion.div>
+          <motion.div {...fadeUp} className="w-full">
+            <img
+              src={processImage}
+              alt="Process collage showing electronics prototyping, haptic pattern software and physical assembly"
               className="w-full object-cover"
             />
           </motion.div>
