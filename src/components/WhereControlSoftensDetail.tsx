@@ -107,12 +107,27 @@ export function WhereControlSoftensDetail() {
               className="w-full object-cover"
             />
           </motion.div>
-          <motion.p
+        </div>
+      </div>
+
+      <div className="case-study-section">
+        <div>
+          <h3 className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest sticky top-24">
+            04 // NEGOTIATE
+          </h3>
+        </div>
+        <div className="flex flex-col gap-6">
+          <motion.div
             {...fadeUp}
-            className="font-['IBM_Plex_Mono',monospace] text-sm uppercase tracking-widest text-black/40"
+            className="font-['DM_Sans'] text-lg text-black/80 leading-relaxed max-w-3xl flex flex-col gap-4"
           >
-            More content coming soon.
-          </motion.p>
+            <p>
+              The Refusing Button gives machine uncertainty a physical form.
+            </p>
+            <p>
+              Through OK, MAYBE and NO, the control becomes less willing to accept an action as confidence decreases.
+            </p>
+          </motion.div>
         </div>
       </div>
     </div>
